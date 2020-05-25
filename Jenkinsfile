@@ -10,7 +10,7 @@ pipeline{
       			agent{ label 'docker_slave' }
 			steps{
 				  sh 'kubectl apply -f hextris.yml'
-				  sh 'kubect get all'
+				  sh 'kubectl get all'
 			}
 		}
 	  }
