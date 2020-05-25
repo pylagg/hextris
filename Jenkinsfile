@@ -1,9 +1,8 @@
 pipeline{
-	agent any
-  	environment {
-      registry = "pylagg/first_repo"
+	environment {
+      	    registry = "pylagg/first_repo"
 	    registryCredential = 'docker_hub'
-    }
+    	}
 	  stages {
         	stage("Code Checkout") {
                   steps {
