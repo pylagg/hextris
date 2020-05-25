@@ -13,9 +13,10 @@ pipeline{
               }
 	      stage('Deployment')
 		{
-      agent{ lable 'docker_slave' }
+      			agent{ lable 'docker_slave' }
 			steps{
 				  sh 'kubectl apply -f hextris1.yml'
+				  sh 'kubect get all'
 			}
 		}
 	
