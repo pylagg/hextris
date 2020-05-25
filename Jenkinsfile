@@ -19,6 +19,7 @@ pipeline{
 				  sh 'kubect get all'
 			}
 		}
+	  }
 	
 	post {
 		 
