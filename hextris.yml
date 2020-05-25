@@ -9,14 +9,14 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 25%
+      maxUnavailable: 50%
   template:
     metadata:
       labels:
         app: hextris-dep
     spec:
       containers:
-      - image: pylagg/first_repo:version2
+      - image: pylagg/first_repo:version1
         imagePullPolicy: Always
         name: hextris
         ports:
