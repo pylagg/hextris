@@ -1,4 +1,5 @@
 pipeline{
+	agent any
 	environment {
       	    registry = "pylagg/first_repo"
 	    registryCredential = 'docker_hub'
@@ -12,7 +13,7 @@ pipeline{
               }
 	      stage('Deployment')
 		{
-      			agent{ lable 'docker_slave' }
+      			agent{ label 'docker_slave' }
 			steps{
 				  sh 'kubectl apply -f hextris1.yml'
 				  sh 'kubect get all'
