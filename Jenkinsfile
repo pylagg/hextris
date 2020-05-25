@@ -13,5 +13,18 @@ pipeline{
 				  sh 'kubectl get all'
 			}
 		}
+	      stage('Enter input'){  
+		steps {
+			input('Do you want to proceed?')
+        	}
+	     }
+              stage('Deploying new version')
+		{
+      			agent{ label 'docker_slave' }
+			steps{
+				  sh 'kubectl set image deployment/hextris-dep hextris=pylagg/first_repo:version2'
+				  sh 'kubectl rollout status deployment hextris-dep'
+			}
+		}
 	  }
 }
