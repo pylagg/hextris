@@ -28,25 +28,7 @@ pipeline{
 				  sh 'kubectl apply -f hextris.yml'
 				  sh 'kubectl get all'
 			}
-		}
-		stage('Docker Image Build for version2') {
- 			 agent {
-			 label 'docker_slave'
-			 }
-			 steps{
-				 git branch: 'version2',
-                		url : 'https://github.com/pylagg/hextris.git'
-				sh 'docker build -t pylagg/first_repo:version2 .'
-			}
-  		}
-		stage('Push version2 image to docker hub') {
-			agent {
-			label 'docker_slave'
-			}
-			steps{
-				sh 'docker push pylagg/first_repo:version2'
-			}
-		}		  
+		}	  
 	      stage('Enter input'){  
 		steps {
 			input('Do you want to proceed?')
