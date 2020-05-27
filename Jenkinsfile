@@ -21,7 +21,7 @@ pipeline{
 				sh 'docker push pylagg/first_repo:version1'
 			}
 		}		  
-	      stage('Deployment')
+	      stage('Deploying version1')
 		{
       			agent{ label 'docker_slave' }
 			steps{
@@ -56,7 +56,7 @@ pipeline{
 			input('Do you want to proceed?')
         	}
 	     }
-              stage('Deploying new version')
+              stage('Deploying version2')
 		{
       			agent{ label 'docker_slave' }
 			steps{
