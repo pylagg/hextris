@@ -8,8 +8,8 @@ pipeline{
     	}
 	  stages {
 		stage('Docker Image Build for version1') {
- 			when {branch 'version1'}
 			 steps{
+				git branch 'version1' 
 				sh 'docker build -t pylagg/first_repo:version1 .'
 				 sh 'docker push pylagg/first_repo:version1'
 			}
@@ -22,8 +22,9 @@ pipeline{
 			}
 		}	
 		  stage('Docker Image Build for version2') {
- 			  when { branch 'version2'}
+ 			  
 			 steps{
+				git branch 'version2'
 				sh 'docker build -t pylagg/first_repo:version2 .'
 			 	sh 'docker push pylagg/first_repo:version2'
 			
