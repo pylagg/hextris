@@ -25,6 +25,7 @@ pipeline{
 				  sh 'kubectl apply -f hextris.yml'
 				  sh 'kubectl get all'
 				  sh 'kubectl get svc service-hextris -o yaml'
+				  sh 'kubectl rollout status deployment hextris-dep'
 			}
 		}	
 		  	
