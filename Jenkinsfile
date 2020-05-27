@@ -28,7 +28,18 @@ pipeline{
 				  sh 'kubectl apply -f hextris.yml'
 				  sh 'kubectl get all'
 			}
-		}	  
+		}	
+		  stage('Docker Image Build for version1') {
+ 			 agent {
+			 label 'docker_slave'
+			 }
+			  when { branch 'version'}
+			 steps{
+				sh 'docker build -t pylagg/first_repo:version1 .'
+			 	sh 'docker push pylagg/first_repo:version1'
+			
+			}
+  		}	
 	      stage('Enter input'){  
 		steps {
 			input('Do you want to proceed?')
