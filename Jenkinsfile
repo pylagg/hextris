@@ -29,17 +29,13 @@ pipeline{
 				  sh 'kubectl get all'
 			}
 		}
-	        stage("Code Checkout for version2") {
-                     steps {
-                	git branch: 'version2',
-                	url : 'https://github.com/pylagg/hextris.git'
-                  }
-                }
 		stage('Docker Image Build for version2') {
  			 agent {
 			 label 'docker_slave'
 			 }
 			 steps{
+				 git branch: 'version2',
+                		url : 'https://github.com/pylagg/hextris.git'
 				sh 'docker build -t pylagg/first_repo:version2 .'
 			}
   		}
