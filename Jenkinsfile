@@ -1,15 +1,14 @@
 pipeline{
-	agent any
+	agent {
+		label 'docker_slave'
+	}
 	environment {
       	    registry = "pylagg/first_repo"
 	    registryCredential = 'docker_hub'
     	}
 	  stages {
 		stage('Docker Image Build for version1') {
- 			 agent {
-			 label 'docker_slave'
-			 }
-			when {branch 'version1'}
+ 			when {branch 'version1'}
 			 steps{
 				sh 'docker build -t pylagg/first_repo:version1 .'
 				 sh 'docker push pylagg/first_repo:version1'
@@ -17,17 +16,13 @@ pipeline{
   		}
 	      stage('Deploying version1')
 		{
-      			agent{ label 'docker_slave' }
-			steps{
+      			steps{
 				  sh 'kubectl apply -f hextris.yml'
 				  sh 'kubectl get all'
 			}
 		}	
 		  stage('Docker Image Build for version2') {
- 			 agent {
-			 label 'docker_slave'
-			 }
-			  when { branch 'version2'}
+ 			  when { branch 'version2'}
 			 steps{
 				sh 'docker build -t pylagg/first_repo:version2 .'
 			 	sh 'docker push pylagg/first_repo:version2'
@@ -41,8 +36,7 @@ pipeline{
 	     }
               stage('Deploying version2')
 		{
-      			agent{ label 'docker_slave' }
-			steps{
+      			steps{
 				  sh 'kubectl set image deployment/hextris-dep hextris=pylagg/first_repo:version2'
 				  sh 'kubectl rollout status deployment hextris-dep'
 			}
