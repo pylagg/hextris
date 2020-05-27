@@ -5,6 +5,22 @@ pipeline{
 	    registryCredential = 'docker_hub'
     	}
 	  stages {
+		stage('Docker Image Build for version1') {
+ 			 agent {
+			 label 'docker_slave'
+			 }
+			 steps{
+				sh 'docker build -t pylagg/first_repo:version1 .'
+			}
+  		}
+		stage('Push version1 image to docker hub') {
+			agent {
+			label 'docker_slave'
+			}
+			steps{
+				sh 'docker push pylagg/first_repo:version1'
+			}
+		}		  
 	      stage('Deployment')
 		{
       			agent{ label 'docker_slave' }
@@ -13,6 +29,28 @@ pipeline{
 				  sh 'kubectl get all'
 			}
 		}
+	        stage("Code Checkout for version2") {
+                     steps {
+                	git branch: 'version2',
+                	url : 'https://github.com/pylagg/hextris.git'
+                  }
+                }
+		stage('Docker Image Build for version2') {
+ 			 agent {
+			 label 'docker_slave'
+			 }
+			 steps{
+				sh 'docker build -t pylagg/first_repo:version2 .'
+			}
+  		}
+		stage('Push version2 image to docker hub') {
+			agent {
+			label 'docker_slave'
+			}
+			steps{
+				sh 'docker push pylagg/first_repo:version2'
+			}
+		}		  
 	      stage('Enter input'){  
 		steps {
 			input('Do you want to proceed?')
