@@ -9,8 +9,8 @@ pipeline{
 	  stages {
 		stage('Docker Image Build for version1') {
 			 steps{
-				git branch : 'version1' 
-				url : 'https://github.com/pylagg/hextris.git'
+				git branch : 'version1' ,
+				url : 'https://github.com/pylagg/hextris.git' ,
 				sh 'docker build -t pylagg/first_repo:version1 .'
 				 sh 'docker push pylagg/first_repo:version1'
 			}
@@ -25,8 +25,8 @@ pipeline{
 		  stage('Docker Image Build for version2') {
  			  
 			 steps{
-				git branch : 'version2'
-				 url : 'https://github.com/pylagg/hextris.git'
+				git branch : 'version2' ,
+				 url : 'https://github.com/pylagg/hextris.git' ,
 				sh 'docker build -t pylagg/first_repo:version2 .'
 			 	sh 'docker push pylagg/first_repo:version2'
 			
