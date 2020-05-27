@@ -23,14 +23,14 @@ pipeline{
 				  sh 'kubectl get all'
 			}
 		}	
-		  stage('Docker Image Build for version1') {
+		  stage('Docker Image Build for version2') {
  			 agent {
 			 label 'docker_slave'
 			 }
-			  when { branch 'version'}
+			  when { branch 'version2'}
 			 steps{
-				sh 'docker build -t pylagg/first_repo:version1 .'
-			 	sh 'docker push pylagg/first_repo:version1'
+				sh 'docker build -t pylagg/first_repo:version2 .'
+			 	sh 'docker push pylagg/first_repo:version2'
 			
 			}
   		}	
