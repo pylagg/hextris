@@ -7,14 +7,7 @@ pipeline{
 	    registryCredential = 'docker_hub'
     	}
 	  stages {
-		stage('Docker Image Build for version1') {
-			 steps{
-				git branch : 'version1' ,
-				url : 'https://github.com/pylagg/hextris.git' ,
-				sh 'docker build -t pylagg/first_repo:version1 .'
-				 sh 'docker push pylagg/first_repo:version1'
-			}
-  		}
+		
 	      stage('Deploying version1')
 		{
       			steps{
@@ -22,16 +15,7 @@ pipeline{
 				  sh 'kubectl get all'
 			}
 		}	
-		  stage('Docker Image Build for version2') {
- 			  
-			 steps{
-				git branch : 'version2' ,
-				 url : 'https://github.com/pylagg/hextris.git' ,
-				sh 'docker build -t pylagg/first_repo:version2 .'
-			 	sh 'docker push pylagg/first_repo:version2'
-			
-			}
-  		}	
+		  	
 	      stage('Enter input'){  
 		steps {
 			input('Do you want to proceed?')
