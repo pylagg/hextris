@@ -9,18 +9,12 @@ pipeline{
  			 agent {
 			 label 'docker_slave'
 			 }
+			when {branch 'version1'}
 			 steps{
 				sh 'docker build -t pylagg/first_repo:version1 .'
+				 sh 'docker push pylagg/first_repo:version1'
 			}
   		}
-		stage('Push version1 image to docker hub') {
-			agent {
-			label 'docker_slave'
-			}
-			steps{
-				sh 'docker push pylagg/first_repo:version1'
-			}
-		}		  
 	      stage('Deploying version1')
 		{
       			agent{ label 'docker_slave' }
