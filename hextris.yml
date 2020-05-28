@@ -16,7 +16,7 @@ spec:
         app: hextris-dep
     spec:
       containers:
-      - image: pylagg/first_repo:version1
+      - image: pylagg/first_repo:version_1.01
         imagePullPolicy: Always
         name: hextris
         ports:
