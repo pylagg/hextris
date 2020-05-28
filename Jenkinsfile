@@ -7,18 +7,18 @@ pipeline{
 	          registryCredential = 'docker_hub'
     	}
 	  stages {
-		stage('Docker Image Build for version2') {
+		stage('Docker Image Build for version_1.02') {
 			 steps{
-				sh 'docker build -t pylagg/first_repo:version2 .'
+				sh 'docker build -t pylagg/first_repo:version_1.02 .'
 				}
   		}
 		  
-		stage('Version2 image push to docker hub') {
+		stage('Version_1.02 image push to docker hub') {
 			 steps{
-				 sh 'docker push pylagg/first_repo:version2'
+				 sh 'docker push pylagg/first_repo:version_1.02'
 				}
   		}
-		  	stage('Run docker image version2'){
+		  	stage('Run docker image version_1.02'){
 			agent {
 			label 'docker_slave'
 			}
@@ -29,15 +29,16 @@ pipeline{
 					docker rm con2
 					fi
         				'''.stripIndent())
-				sh 'docker run -d --name con2 -p 8081:80 pylagg/first_repo:version2'
+				sh 'docker run -d --name con2 -p 8081:80 pylagg/first_repo:version_1.02'
 			}
 		}
 			
 	      stage('Deploying version2')
 		{
       			steps{
-           sh 'kubectl set image deployment/hextris-dep hextris=pylagg/first_repo:version2'
-				   sh 'kubectl rollout status deployment hextris-dep'
+           			  sh 'kubectl apply -f hextris.yml'
+				  sh 'kubectl get all'
+				  sh 'kubectl get svc service-hextris -o yaml''
 			}
 		}	
 		  	
