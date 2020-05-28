@@ -33,7 +33,7 @@ pipeline{
 			}
 		}
 			
-	      stage('Deploying version2')
+	      stage('Deploying version_1.02')
 		{
       			steps{
            			  sh 'kubectl apply -f hextris.yml'
