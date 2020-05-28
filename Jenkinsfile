@@ -18,6 +18,20 @@ pipeline{
 				 sh 'docker push pylagg/first_repo:version1'
 				}
   		}
+		  	stage('Run docker image version1'){
+			agent {
+			label 'docker_slave'
+			}
+			steps{
+				sh( script: '''#!/bin/bash
+           				 if [ "$(docker ps -aq -f name=con1)" ]; then
+					docker stop con1
+					docker rm con1
+					fi
+        				'''.stripIndent())
+				sh 'docker run -d --name con1 -p 8080:80 pylagg/first_repo:version1'
+			}
+		}
 			
 	      stage('Deploying version1')
 		{
