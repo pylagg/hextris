@@ -7,6 +7,12 @@ pipeline{
 	    registryCredential = 'docker_hub'
     	}
 	  stages {
+		  stage('Configuring cluster') {
+			  steps{
+				  sh 'aws eks --region us-west-2 update-kubeconfig --name hextris_cluster'
+				  sh 'kubectl get svc'
+			  }
+		  }
 		stage('Docker Image Build for version_1.01') {
 			 steps{
 				sh 'docker build -t pylagg/first_repo:version_1.01 .'
