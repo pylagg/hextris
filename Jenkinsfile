@@ -9,7 +9,7 @@ pipeline{
 	  stages {
 		  stage('Configuring cluster') {
 			  steps{
-				  sh 'aws eks describe-cluster --name hextris_cluster --verbose'
+				  sh 'aws eks describe-cluster --name hextris_cluster'
 				  sh 'aws eks --region us-west-1 update-kubeconfig --name hextris_cluster'
 				  sh 'kubectl get svc'
 			  }
